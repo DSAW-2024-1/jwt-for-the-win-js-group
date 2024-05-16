@@ -21,7 +21,7 @@ function verifyToken(req, res, next) {
             return res.status(401).json({ error: 'Unauthorized' });
         }
         req.userData = decoded;
-        next();
+        next(); // Llama a next() para continuar con la ejecución de la solicitud
     });
 }
 
@@ -34,9 +34,7 @@ protectedRoutes.get('/profile', (req, res) => {
         firstName: "Gaius",
         lastName: "Marcellus",
         email: "gaius.marcellus@example.com",
-        birthDate: "1985-07-12"
-
-    };
+        birthDate: "1985-07-12"};
     res.status(200).json(profileInfo);
 });
 
@@ -50,14 +48,15 @@ protectedRoutes.post('/form', (req, res) => {
     res.status(200).json({ content });
 });
 
-app.post('/signin', (req, res) => {
-    const { username, password } = req.body;
-    if (username === 'admin' && password === 'admin') {
-        const token = createToken({ username });
+app.post('/login', (req, res) => { // Cambiado a '/login' en lugar de '/signin'
+    const { email, password } = req.body;
+    console.log("Credenciales recibidas:", email, password); // Registro de las credenciales recibidas
+    if (email === 'admin@admin.com' && password === 'admin') {
+        const token = createToken({ email });
         res.cookie('authToken', token, { httpOnly: true });
         res.status(200).json({ message: 'Inicio de sesión correcto' });
     } else {
-        res.status(401).json({ error: 'datos de sesion inválidas' });
+        res.status(401).json({ error: 'Datos de sesión inválidos' });
     }
 });
 
