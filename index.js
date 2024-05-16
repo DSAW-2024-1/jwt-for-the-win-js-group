@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
@@ -62,7 +61,9 @@ app.post('/login', (req, res) => {
     }
 });
 
-app.use('/', protectedRoutes);
+app.get('/', (req, res) => {
+    res.send('<h2>Servidor funcionando en backend</h2>');
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
