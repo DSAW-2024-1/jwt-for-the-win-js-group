@@ -21,7 +21,7 @@ function verifyToken(req, res, next) {
             return res.status(401).json({ error: 'Unauthorized' });
         }
         req.userData = decoded;
-        next(); // Llama a next() para continuar con la ejecución de la solicitud
+        next(); 
     });
 }
 
@@ -63,5 +63,5 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`El servidor funcionando y escuchando en el puerto ${PORT}`);
+    console.log('El servidor funcionando y escuchando en el puerto ${PORT}');
 });
