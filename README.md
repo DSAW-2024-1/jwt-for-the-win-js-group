@@ -1,7 +1,7 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/ajKCO3Oe)
 # Desarrollo de Aplicaciones Web
 ## Santiago Gutierrez, Josue Sarmiento
-## link del dominio: https://js-puce-three.vercel.app/
+## link del dominio: https://jwt-for-the-win-js-group.vercel.app/
 ### Universidad de La Sabana
 #### 2024 - I
 
