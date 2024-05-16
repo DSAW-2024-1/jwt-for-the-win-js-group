@@ -21,11 +21,12 @@ function verifyToken(req, res, next) {
             return res.status(401).json({ error: 'Unauthorized' });
         }
         req.userData = decoded;
-        next(); 
+        next(); // Llama a next() para continuar con la ejecución de la solicitud
     });
 }
 
 const protectedRoutes = express.Router();
+
 protectedRoutes.use(verifyToken);
 
 protectedRoutes.get('/profile', (req, res) => {
@@ -43,11 +44,14 @@ protectedRoutes.get('/contacts', (req, res) => {
     res.status(200).json(contactsList);
 });
 
-app.use(protectedRoutes); // Monta las rutas protegidas directamente en la raíz de la aplicación
+protectedRoutes.post('/form', (req, res) => {
+    const { content } = req.body;
+    res.status(200).json({ content });
+});
 
-app.post('/login', (req, res) => {
+app.post('/login', (req, res) => { // Cambiado a '/login' en lugar de '/signin'
     const { email, password } = req.body;
-    console.log("Credenciales recibidas:", email, password);
+    console.log("Credenciales recibidas:", email, password); // Registro de las credenciales recibidas
     if (email === 'admin@admin.com' && password === 'admin') {
         const token = createToken({ email });
         res.cookie('authToken', token, { httpOnly: true });
@@ -58,8 +62,9 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.send('<h2>Servidor funcionando en backend</h2>');
+    res.status(200).send('<h2>The backend is serving</h2>');
 });
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
