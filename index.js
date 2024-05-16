@@ -26,7 +26,6 @@ function verifyToken(req, res, next) {
 }
 
 const protectedRoutes = express.Router();
-
 protectedRoutes.use(verifyToken);
 
 protectedRoutes.get('/profile', (req, res) => {
@@ -44,10 +43,7 @@ protectedRoutes.get('/contacts', (req, res) => {
     res.status(200).json(contactsList);
 });
 
-protectedRoutes.post('/form', (req, res) => {
-    const { content } = req.body;
-    res.status(200).json({ content });
-});
+app.use(protectedRoutes); // Monta las rutas protegidas directamente en la raíz de la aplicación
 
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
@@ -67,5 +63,5 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`El servidor funcionando y escuchando en el puerto ${PORT}`);
+    console.log(`El servidor funcionando y escuchando en el puerto ${PORT}`);
 });
