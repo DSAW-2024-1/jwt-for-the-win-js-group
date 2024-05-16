@@ -34,7 +34,8 @@ protectedRoutes.get('/profile', (req, res) => {
         firstName: "Gaius",
         lastName: "Marcellus",
         email: "gaius.marcellus@example.com",
-        birthDate: "1985-07-12"};
+        birthDate: "1985-07-12"
+    };
     res.status(200).json(profileInfo);
 });
 
@@ -60,7 +61,10 @@ app.post('/login', (req, res) => { // Cambiado a '/login' en lugar de '/signin'
     }
 });
 
-app.use('/', protectedRoutes);
+app.get('/', (req, res) => {
+    res.status(200).send('<h2>The backend is serving</h2>');
+});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
